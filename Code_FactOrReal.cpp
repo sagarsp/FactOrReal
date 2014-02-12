@@ -1,22 +1,58 @@
 #include <stdio.h>
-
-#define		MAX_LENGTH	100				// Defining the maximum length of given number
+#include <stdlib.h>
+#define		MAX_LENGTH	300				// Defining the maximum length of given number
 
 int main()
 {
-	int givenNumber [] = {4,7,9,0,0,1,6,0,0,-1};		// Given Number with ending value =-1
+	int givenNumber [300] = {4,7,9,0,0,1,6,0,0,-1};		// Given Number with ending value =-1
 	int updatedNumber [MAX_LENGTH] ={};				// This will be the updating number every time we divide by 2,3,4,...
 	int divisingNumber [MAX_LENGTH] ={};				// This number will be divided by 2,3,4... including reminder
-	int instantReminderForInteger [100] = {};		// This array shows the Reminder of each digit, while deviding by 2,3,4...
+	int instantReminderForInteger [300] = {};		// This array shows the Reminder of each digit, while deviding by 2,3,4...
 	int flagFectorial = 1;					// Initlizing flag with an assumption, that given number is fectorical of any integer number
 	int fectOfResultantNumber = 1;				// Result : The givenNumber is the fectorial of this number
-	int i;							// Initlizing i for using in finding the total number of digits in number
+	int i = 0;							// Initlizing i for using in finding the total number of digits in number
+	
 
+	/* Open the file to read the number */
+	FILE* fileOfNumber;
+	char charFromFile;
+	int totalLengthOfNumber = 0;
+	fileOfNumber = fopen("number.txt","r");
+	charFromFile = fgetc (fileOfNumber);
+	while(charFromFile != EOF)
+	{
+		if(charFromFile >=48 && charFromFile <=57)
+			totalLengthOfNumber++;
+		charFromFile = fgetc(fileOfNumber);
+	}		
+	fseek(fileOfNumber,0,SEEK_SET);
+	
+	/* Read the number into givenNumberFromFile */
+	int *givenNumberFromFile;
+	givenNumberFromFile = (int*)malloc(totalLengthOfNumber*sizeof(int));
+	charFromFile = fgetc (fileOfNumber);
+	while(charFromFile != EOF)
+	{
+		if(charFromFile >=48 && charFromFile <=57)
+		{
+			*givenNumberFromFile = charFromFile - 48;
+			printf("%c\n",charFromFile);		
+			givenNumber[i] = *givenNumberFromFile;
+			givenNumberFromFile++;
+			i++;
+		}
+		charFromFile = fgetc(fileOfNumber);
+	}		
+	givenNumber[i+1] = -1;
+
+	printf("=====================================\nSize of given number = %d\n=====================================",totalLengthOfNumber);
 	/*Find the number of digits in given number*/
+	/*
 	for (i=0;givenNumber[i] != -1; i++);
 		int numberOfDigits = i;
-
-	int updatedNumberOfDigits = numberOfDigits;		// Initilize the number of digits in updated number same as given number because, initially we have updated number same as given number
+	*/
+	int numberOfDigits = totalLengthOfNumber;
+	int updatedNumberOfDigits = totalLengthOfNumber;		// Initilize the number of digits in updated number same as given number because, initially we have updated number same as given number
 	
 	/*The loop for doing division by 2,3,4,... and checking whether the given number is fectorial of any integer number*/
 	for(int j=2; 	; j++)					// The loop will always start with 2 and go till infinite number

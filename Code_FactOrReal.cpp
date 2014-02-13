@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define		MAX_LENGTH	300				// Defining the maximum length of given number
+#define		MAX_LENGTH	3000				// Defining the maximum length of given number
 
 int main()
 {
-	int givenNumber [300] = {4,7,9,0,0,1,6,0,0,-1};		// Given Number with ending value =-1
+	int givenNumber [MAX_LENGTH] = {4,7,9,0,0,1,6,0,0,-1};		// Given Number with ending value =-1
 	int updatedNumber [MAX_LENGTH] ={};				// This will be the updating number every time we divide by 2,3,4,...
 	int divisingNumber [MAX_LENGTH] ={};				// This number will be divided by 2,3,4... including reminder
-	int instantReminderForInteger [300] = {};		// This array shows the Reminder of each digit, while deviding by 2,3,4...
+	int instantReminderForInteger [MAX_LENGTH] = {};		// This array shows the Reminder of each digit, while deviding by 2,3,4...
 	int flagFectorial = 1;					// Initlizing flag with an assumption, that given number is fectorical of any integer number
 	int fectOfResultantNumber = 1;				// Result : The givenNumber is the fectorial of this number
 	int i = 0;							// Initlizing i for using in finding the total number of digits in number
